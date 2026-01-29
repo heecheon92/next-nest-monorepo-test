@@ -117,6 +117,7 @@ Response to Next.js -> Client
 - Next.js는 `output: "standalone"`으로 설정되어 있어 프로덕션 컨테이너에 적합합니다.
 - NestJS는 기본 포트 `3001`이며 컨테이너에서 `0.0.0.0`으로 리스닝합니다.
 - Biome은 앱 단위 설정(`apps/nextjs/biome.json`, `apps/nestjs/biome.json`)으로 운영됩니다.
+- NestJS는 DI 문제를 피하기 위해 `import type` 자동 변환과 import 정렬을 비활성화했습니다.
 - 이 레포는 실험/학습 목적이므로 구조와 도구는 변경될 수 있습니다.
 
 ## 유용한 명령어
