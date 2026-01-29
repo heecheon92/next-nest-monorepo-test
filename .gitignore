@@ -8,9 +8,5 @@ node_modules/
 **/build/
 **/coverage/
 
-# env
-**/.env.local
-**/.env.*.local
-
 # misc
 .DS_Store
