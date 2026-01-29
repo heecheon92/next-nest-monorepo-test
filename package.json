@@ -11,7 +11,7 @@
     "biome": "pnpm -C apps/nextjs typecheck && pnpm -C apps/nextjs lint && pnpm -C apps/nestjs typecheck && pnpm -C apps/nestjs lint",
     "biome:fix": "pnpm -C apps/nextjs typecheck && pnpm -C apps/nextjs lint:fix && pnpm -C apps/nestjs typecheck && pnpm -C apps/nestjs lint:fix",
     "biome:summary": "pnpm -C apps/nextjs lint && pnpm -C apps/nestjs lint",
-    "docker:build": "docker build -f apps/nextjs/Dockerfile -t next-nest/nextjs:latest . && docker build -f apps/nestjs/Dockerfile -t next-nest/nestjs:latest .",
+    "docker:build": "pnpm biome && docker build -f apps/nextjs/Dockerfile -t next-nest/nextjs:latest . && docker build -f apps/nestjs/Dockerfile -t next-nest/nestjs:latest .",
     "docker:deploy": "pnpm docker:build && docker stack deploy -c docker-stack.yml next-nest"
   },
   "devDependencies": {
