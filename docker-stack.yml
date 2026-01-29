@@ -1,5 +1,6 @@
 services:
   nextjs:
+    image: next-nest/nextjs:latest
     build:
       context: .
       dockerfile: apps/nextjs/Dockerfile
@@ -9,9 +10,16 @@ services:
       - PORT=3000
       - HOSTNAME=0.0.0.0
       - NEXT_PUBLIC_API_BASE=http://nestjs:3001
+    networks:
+      - app
     depends_on:
       - nestjs
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
   nestjs:
+    image: next-nest/nestjs:latest
     build:
       context: .
       dockerfile: apps/nestjs/Dockerfile
@@ -20,3 +28,13 @@ services:
     environment:
       - PORT=3001
       - CORS_ORIGIN=http://localhost:3000
+    networks:
+      - app
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+networks:
+  app:
+    driver: overlay

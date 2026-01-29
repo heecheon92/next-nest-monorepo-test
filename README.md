@@ -55,6 +55,24 @@ docker compose up
 - Next.js: http://localhost:3000
 - NestJS: http://localhost:3001
 
+## Docker Swarm
+
+Deploy the stack (from repo root):
+
+```
+docker stack deploy -c docker-stack.yml next-nest
+```
+
+Build images + deploy via scripts:
+
+```
+pnpm docker:build
+pnpm docker:deploy
+```
+
+Update the public origin list as needed:
+- In `docker-stack.yml`, set `CORS_ORIGIN` to the public URL(s) you use to access Next.js.
+
 ## Notes
 
 - Next.js is configured for `output: "standalone"` to run efficiently in production containers.
