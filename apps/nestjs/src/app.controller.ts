@@ -21,4 +21,10 @@ export class AppController {
 
     return `Client info: ip=${ip}, userAgent=${userAgent}`;
   }
+
+  @Get("kill")
+  killNest(): string {
+    setTimeout(() => process.exit(1), 100);
+    return "NestJS shutting down...";
+  }
 }

@@ -75,6 +75,12 @@ pnpm docker:build
 pnpm docker:deploy
 ```
 
+이미지 정리:
+
+```
+pnpm docker:clean-images
+```
+
 CORS 설정:
 - `docker-stack.yml`에서 `CORS_ORIGIN`을 Next.js에 접근하는 공개 URL로 설정하세요.
 

@@ -1,8 +1,6 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 
-ENV PNPM_STORE_PATH=/app/.pnpm-store
-
 RUN corepack enable
 RUN pnpm config set store-dir /app/.pnpm-store
 
