@@ -2,6 +2,18 @@
   "name": "monorepo",
   "private": true,
   "packageManager": "pnpm@9.7.1",
+  "scripts": {
+    "lint": "pnpm -C apps/nextjs typecheck && pnpm -C apps/nextjs lint && pnpm -C apps/nestjs typecheck && pnpm -C apps/nestjs lint",
+    "lint:fix": "pnpm -C apps/nextjs typecheck && pnpm -C apps/nextjs lint:fix && pnpm -C apps/nestjs typecheck && pnpm -C apps/nestjs lint:fix",
+    "pret": "pnpm -C apps/nextjs format && pnpm -C apps/nestjs format",
+    "pret:fix": "pnpm -C apps/nextjs format && pnpm -C apps/nestjs format",
+    "biome": "pnpm -C apps/nextjs typecheck && pnpm -C apps/nextjs lint && pnpm -C apps/nestjs typecheck && pnpm -C apps/nestjs lint",
+    "biome:fix": "pnpm -C apps/nextjs typecheck && pnpm -C apps/nextjs lint:fix && pnpm -C apps/nestjs typecheck && pnpm -C apps/nestjs lint:fix",
+    "biome:summary": "pnpm -C apps/nextjs lint && pnpm -C apps/nestjs lint"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.4"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"

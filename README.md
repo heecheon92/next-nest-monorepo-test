@@ -59,6 +59,7 @@ docker compose up
 
 - Next.js is configured for `output: "standalone"` to run efficiently in production containers.
 - NestJS defaults to port `3001` and listens on `0.0.0.0` inside containers.
+- Biome is configured at the repo root and used for both apps.
 - This repo is intended for experimentation; expect structure and tooling to evolve.
 
 ## Useful Commands
@@ -69,4 +70,3 @@ pnpm --filter nestjs build
 pnpm --filter nextjs lint
 pnpm --filter nestjs test
 ```
-
