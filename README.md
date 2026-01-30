@@ -81,6 +81,21 @@ pnpm docker:deploy
 pnpm docker:clean-images
 ```
 
+아키텍처별 이미지 TAR 생성:
+
+```
+pnpm docker:tar:amd64
+pnpm docker:tar:arm64
+pnpm docker:tar:all
+```
+
+TAR 로드(대상 서버에서):
+
+```
+docker load -i dist/images/nextjs_amd64.tar
+docker load -i dist/images/nestjs_amd64.tar
+```
+
 CORS 설정:
 - `docker-stack.yml`에서 `CORS_ORIGIN`을 Next.js에 접근하는 공개 URL로 설정하세요.
 
