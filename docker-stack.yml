@@ -17,7 +17,7 @@ services:
         condition: any
         delay: 1s
   nextjs:
-    image: next-nest/nextjs:arm64
+    image: next-nest/nextjs:latest
     build:
       context: .
       dockerfile: apps/nextjs/Dockerfile
@@ -44,13 +44,12 @@ services:
         delay: 2s
         max_attempts: 0
   nestjs:
-    image: next-nest/nestjs:arm64
+    image: next-nest/nestjs:latest
     build:
       context: .
       dockerfile: apps/nestjs/Dockerfile
     environment:
       - PORT=3001
-      - CORS_ORIGIN=http://nextjs:3000
       - HOST_MACHINE_NAME={{.Node.Hostname}}
     networks:
       - app
