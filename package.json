@@ -11,10 +11,10 @@
     "biome": "pnpm -C apps/nextjs typecheck && pnpm -C apps/nextjs lint && pnpm -C apps/nestjs typecheck && pnpm -C apps/nestjs lint",
     "biome:fix": "pnpm -C apps/nextjs typecheck && pnpm -C apps/nextjs lint:fix && pnpm -C apps/nestjs typecheck && pnpm -C apps/nestjs lint:fix",
     "biome:summary": "pnpm -C apps/nextjs lint && pnpm -C apps/nestjs lint",
-    "docker:build": "pnpm biome && docker build -f apps/nextjs/Dockerfile -t next-nest/nextjs:latest . && docker build -f apps/nestjs/Dockerfile -t next-nest/nestjs:latest .",
+    "docker:build": "pnpm biome && docker build --no-cache -f apps/nextjs/Dockerfile -t next-nest/nextjs:latest . && docker build --no-cache -f apps/nestjs/Dockerfile -t next-nest/nestjs:latest .",
     "docker:deploy": "pnpm docker:build && docker stack deploy -c docker-stack.yml next-nest",
-    "docker:tar:amd64": "mkdir -p dist/images && docker buildx build --platform linux/amd64 -f apps/nextjs/Dockerfile -t next-nest/nextjs:amd64 --output type=docker,dest=dist/images/nextjs_amd64.tar . && docker buildx build --platform linux/amd64 -f apps/nestjs/Dockerfile -t next-nest/nestjs:amd64 --output type=docker,dest=dist/images/nestjs_amd64.tar .",
-    "docker:tar:arm64": "mkdir -p dist/images && docker buildx build --platform linux/arm64 -f apps/nextjs/Dockerfile -t next-nest/nextjs:arm64 --output type=docker,dest=dist/images/nextjs_arm64.tar . && docker buildx build --platform linux/arm64 -f apps/nestjs/Dockerfile -t next-nest/nestjs:arm64 --output type=docker,dest=dist/images/nestjs_arm64.tar .",
+    "docker:tar:amd64": "mkdir -p dist/images && docker buildx build --no-cache --platform linux/amd64 -f apps/nextjs/Dockerfile -t next-nest/nextjs:amd64 --output type=docker,dest=dist/images/nextjs_amd64.tar . && docker buildx build --no-cache --platform linux/amd64 -f apps/nestjs/Dockerfile -t next-nest/nestjs:amd64 --output type=docker,dest=dist/images/nestjs_amd64.tar .",
+    "docker:tar:arm64": "mkdir -p dist/images && docker buildx build --no-cache --platform linux/arm64 -f apps/nextjs/Dockerfile -t next-nest/nextjs:arm64 --output type=docker,dest=dist/images/nextjs_arm64.tar . && docker buildx build --no-cache --platform linux/arm64 -f apps/nestjs/Dockerfile -t next-nest/nestjs:arm64 --output type=docker,dest=dist/images/nestjs_arm64.tar .",
     "docker:tar:all": "pnpm docker:tar:amd64 && pnpm docker:tar:arm64",
     "docker:clean-images": "docker images \"next-nest/*\" -q | xargs -r docker rmi -f"
   },

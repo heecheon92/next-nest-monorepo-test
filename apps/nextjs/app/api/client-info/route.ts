@@ -2,9 +2,9 @@ const NEST_INTERNAL_URL = process.env.NEST_INTERNAL_URL || "http://nestjs:3001";
 const HOST_MACHINE_NAME = process.env.HOST_MACHINE_NAME ?? "unknown";
 
 export async function GET() {
-  const target = `${NEST_INTERNAL_URL}/kill`;
+  const target = `${NEST_INTERNAL_URL}/client-info`;
   const startedAt = Date.now();
-  console.info(`${HOST_MACHINE_NAME}: kill-nest proxy start`, {
+  console.info(`${HOST_MACHINE_NAME}: client-info proxy start`, {
     target,
     startedAt,
   });
@@ -12,7 +12,7 @@ export async function GET() {
     const res = await fetch(target);
     const text = await res.text();
     const durationMs = Date.now() - startedAt;
-    console.info(`${HOST_MACHINE_NAME}: kill-nest proxy success`, {
+    console.info(`${HOST_MACHINE_NAME}: client-info proxy success`, {
       target,
       status: res.status,
       length: text.length,
@@ -21,7 +21,7 @@ export async function GET() {
     return new Response(text, { status: res.status });
   } catch (err) {
     const durationMs = Date.now() - startedAt;
-    console.error(`${HOST_MACHINE_NAME}: kill-nest proxy failed`, {
+    console.error(`${HOST_MACHINE_NAME}: client-info proxy failed`, {
       target,
       error: err instanceof Error ? err.message : String(err),
       stack: err instanceof Error ? err.stack : undefined,

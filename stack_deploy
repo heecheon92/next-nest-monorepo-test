@@ -1,0 +1,7 @@
+#!/bin/sh
+
+docker node update --label-add ingress=true $(docker node ls |grep Leader |awk '{ print $1 }')
+docker stack deploy -c docker-stack.yml nn
+docker service update --force nn_ingress
+docker service update --force nn_nextjs
+docker service update --force nn_nestjs

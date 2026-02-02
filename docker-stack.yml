@@ -1,39 +1,76 @@
 services:
+  ingress:
+    image: nginx:alpine
+    ports:
+      - "3000:3000"
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/nginx.conf
+    networks:
+      - app
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.ingress == true
+      restart_policy:
+        condition: any
+        delay: 1s
   nextjs:
-    image: next-nest/nextjs:latest
+    image: next-nest/nextjs:arm64
     build:
       context: .
       dockerfile: apps/nextjs/Dockerfile
-    ports:
-      - "3000:3000"
     environment:
       - PORT=3000
       - HOSTNAME=0.0.0.0
-      - NEXT_PUBLIC_API_BASE=http://nestjs:3001
+      - NEST_INTERNAL_URL=http://nestjs:3001
+      - HOST_MACHINE_NAME={{.Node.Hostname}}
     networks:
       - app
     depends_on:
       - nestjs
     deploy:
-      replicas: 2
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 1s
+        order: start-first
+      rollback_config:
+        parallelism: 1
+        order: stop-first
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 2s
+        max_attempts: 0
   nestjs:
-    image: next-nest/nestjs:latest
+    image: next-nest/nestjs:arm64
     build:
       context: .
       dockerfile: apps/nestjs/Dockerfile
-    ports:
-      - "3001:3001"
     environment:
       - PORT=3001
-      - CORS_ORIGIN=http://localhost:3000
+      - CORS_ORIGIN=http://nextjs:3000
+      - HOST_MACHINE_NAME={{.Node.Hostname}}
     networks:
       - app
     deploy:
-      replicas: 2
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 1s
+        order: start-first
+      rollback_config:
+        parallelism: 1
+        order: stop-first
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 2s
+        max_attempts: 0
+
+configs:
+  nginx_conf:
+    file: ./nginx.conf
 
 networks:
   app:
