@@ -44,7 +44,7 @@ proper context and ensures all Next.js queries use official documentation.
 
 ## Notes
 
-- Code format must follow Biome configs. You can check if you work is coherent to the rest of codebase with "npm run biome".
+- Code format must follow Biome configs. You can check if you work is coherent to the rest of codebase with "pnpm biome".
 - During the biome linting, if you encounter "no await" in async function, you can ignore that case if the file is marked with "use cache" directive because the directive requires a page function to be async even though the function does not utilize any async function.
 - When you add a new API, make sure that added code is sorted by API number. Do not insert the api into an arbitrary spot.
 - Suggest user to commit changes instead of waiting for users to tell you to commit.

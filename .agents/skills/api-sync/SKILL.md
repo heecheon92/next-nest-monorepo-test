@@ -53,4 +53,4 @@ Use this skill when adding or updating Greet Academy APIs.
 
 - Verify API number ordering.
 - Ensure no mixed auth usage (`fetch` vs `fetcher.fetch`).
-- Suggest `npm run biome` if coherence check is requested.
+- Suggest `pnpm biome` if coherence check is requested.
