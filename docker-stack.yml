@@ -74,3 +74,8 @@ configs:
 networks:
   app:
     driver: overlay
+    # https://docs.docker.com/engine/network/drivers/overlay/
+    # This enables IPsec encryption at the level of the Virtual Extensible LAN (VXLAN).
+    # This encryption imposes a non-negligible performance penalty, so you should test this option before using it in production.
+    # driver_opts:
+    #   encrypted: "true"

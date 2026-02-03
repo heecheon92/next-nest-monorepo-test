@@ -1,5 +1,5 @@
 const NEST_INTERNAL_URL = process.env.NEST_INTERNAL_URL || "http://nestjs:3001";
-const HOST_MACHINE_NAME = process.env.HOST_MACHINE_NAME ?? "unknown";
+const HOST_MACHINE_NAME = process.env.HOST_MACHINE_NAME || "unknown";
 
 export async function GET() {
   const target = `${NEST_INTERNAL_URL}/kill`;
